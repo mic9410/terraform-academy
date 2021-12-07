@@ -46,16 +46,16 @@ resource "aws_instance" "app_server" {
 resource "aws_security_group" "main" {
   ingress {
     description = "SSH"
-    from_port   = 0  # SSH client port is not a fixed port
-    to_port     = 65535
+    from_port   = 22  # SSH client port is not a fixed port
+    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] #allow web traffic. 46.64.73.251/32
   }
 
-  egress {
-    from_port   = 0
-    to_port     = 65535  # SSH client port is not a fixed port
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+ egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 }
